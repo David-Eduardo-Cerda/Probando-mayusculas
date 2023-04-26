@@ -1,0 +1,56 @@
+{% extends 'template/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    
+<h1>Hola estudiantes</h1>
+
+{% endblock %}
+
+{% block Cambio %}
+
+<h1>Bienvenido Estudiantes</h1>
+<form>
+    <input type="submit" value="Agregar" >
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        
+        {% for estudiante in estudiantes %}
+        <tr>
+            <td>
+                <div class="container">
+                {{ estudiante.id }}
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                {{ estudiante.nombre }}
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                {{ estudiante.apellido }}
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                {{ estudiante.email }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

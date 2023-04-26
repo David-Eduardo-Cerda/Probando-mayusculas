@@ -1,0 +1,70 @@
+{% extends 'template/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    
+<h1>Hola profesores</h1>
+
+{% endblock %}
+
+{% block Cambio %}
+
+<h1>Bienvenido Profesores</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    
+    {{ form }}
+   
+    </table>
+   <input type="submit" value="Agregar">         
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Profecion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for profesor in profesores %}
+        <tr>
+            
+            <td>
+                <div class="container">
+                {{ profesor.id }}
+                </div>
+            </td> 
+           
+            <td>
+                <div class="container">
+                {{ profesor.nombre }}
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                {{ profesor.apellido }}
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                {{ profesor.email }}
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                {{ profesor.profecion }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
