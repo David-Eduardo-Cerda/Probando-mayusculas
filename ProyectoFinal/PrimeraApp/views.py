@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Curso , Profesor, Estudiante
 from django.http import HttpResponse
 
-from .form import Profesorform
+from .form import Profesorform , Estudiantesform
 
 
 """def crear_curso(request):
@@ -25,8 +25,21 @@ def Cursos(request):
  
 def Estudiantes(request):
 
+      if request.method == "POST":
+            form = Estudiantesform(request.POST)
+            if form.is_valid:
+                  
+                  estudiante = Estudiante()
+                  estudiante.nombre = form.cleaned_data["nombre"]
+                  estudiante.apellido = form.cleaned_data["apellido"]
+                  estudiante.email = form.cleaned_data["email"]
+                  estudiante.save()
+                  form = Estudiantesform()
+      else:
+            form = Estudiantesform()           
+
       estudiantes = Estudiante.objects.all()
-      contex = {"estudiantes":estudiantes}
+      contex = {"estudiantes":estudiantes, "form": form}
 
       return render (request ,'template/Estudiantes.html',contex) 
 

@@ -11,16 +11,18 @@
 {% block Cambio %}
 
 <h1>Bienvenido Estudiantes</h1>
-<form>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
     <input type="submit" value="Agregar" >
 </form>
 <table>
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>email</th>
         </tr>
     </thead>
     <tbody>
