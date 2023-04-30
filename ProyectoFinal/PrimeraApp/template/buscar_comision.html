@@ -1,0 +1,25 @@
+{% extends 'template/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    
+<h1 class="mb-5">Realiza una busqueda de Comision</h1>
+
+{% endblock %}
+
+{% block Cambio %}
+
+<h3d>{{ mensaje }}</h3>
+
+<form action="{% url 'buscar' %}" method="GET">
+
+    <input type="number" name="comision" id="comision" placeholder="INSERTE COMISION">
+
+    <input type="submit" value="buscar comision">
+
+</form>
+
+
+
+{% endblock %}

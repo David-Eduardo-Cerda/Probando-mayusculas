@@ -1,0 +1,30 @@
+{% extends 'template/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    
+<h1 class="mb-5">resultados de la busqueda de comision</h1>
+
+{% endblock %}
+
+{% block Cambio %}
+
+<h1>LISTADO DE CURSOS</h1>
+
+{% if cursos %}
+
+{% for curso in cursos %}
+
+<h3>{{ cursos.nombre }} - {{ cursos.comision }}</h3>  <!-- chequear que comision sea en minusculas -->
+
+{% endfor %}
+
+{% else %}
+
+<h2>NO HAY CURSOS</h2>
+
+{% endif %}
+
+
+{% endblock %}
