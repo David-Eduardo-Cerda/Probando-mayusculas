@@ -27,9 +27,9 @@ def Estudiantes(request):
 
       if request.method == "POST":
             form = Estudiantesform(request.POST)
-            if form.is_valid:
-                  
+            if form.is_valid():
                   estudiante = Estudiante()
+                  #cleaned_data = form.cleaned_data
                   estudiante.nombre = form.cleaned_data["nombre"]
                   estudiante.apellido = form.cleaned_data["apellido"]
                   estudiante.email = form.cleaned_data["email"]
@@ -75,3 +75,17 @@ def inicio(request):
 
 def InicioApp(request):
       return render(request ,'template/InicioApp.html')
+
+
+def buscar (request):
+
+      comision = request.GET["comision"]
+      if comision!='':
+            cursos = Curso.objects.filter(comision__icontains = comision)
+            return render(request, "template/resultados_busquedas.html", {"cursos": cursos})
+      else:
+            return render(request, "template/buscar_comision.html", {'mensaje':"Che ingresa una comision"})
+
+
+def buscar_comision(request):
+      return render(request, 'template/buscar_comision.html')

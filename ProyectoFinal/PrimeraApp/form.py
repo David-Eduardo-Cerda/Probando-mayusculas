@@ -10,5 +10,5 @@ class Profesorform(forms.Form):
 
 class Estudiantesform(forms.Form):
     nombre = forms.CharField(max_length=30)
-    apellitod = forms.CharField(max_length=30)
+    apellido = forms.CharField(max_length=30)
     email = forms.EmailField()

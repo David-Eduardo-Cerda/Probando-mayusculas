@@ -8,10 +8,13 @@ urlpatterns = [
    
     path('', views.InicioApp, name="inicioApp"),
     #path('crear_curso/', views.crear_curso ),
-    path('Cursos/' , views.Cursos, name="cursos"),
-    path('Profesores/' , views.Profesores, name="profesores"),
-    path('Estudiantes/' , views.Estudiantes,name="estudiantes"),
-    path('Entregables/', views.Entregables, name="entregables" ),
+    path('cursos/' , views.Cursos, name="cursos"),
+    path('profesores/' , views.Profesores, name="profesores"),
+    path('estudiantes/' , views.Estudiantes,name="estudiantes"),
+    path('entregables/', views.Entregables, name="entregables" ),
+    path('buscar_comision/', views.buscar_comision, name="buscar_comision"),
+    path('buscar_comision/', views.buscar, name =" buscar "),
+    
 
 ]
     
