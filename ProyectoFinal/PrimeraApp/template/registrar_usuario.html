@@ -1,0 +1,28 @@
+{% extends 'template/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    
+<h1 class="mb-5">Formulario de ingreso</h1>
+
+{% endblock %}
+
+
+
+{% block Cambio %}
+
+<h3>{{ mensaje }}</h3>
+
+<form action="{% url 'registrar_usuario' %}" method="POST"> {% csrf_token %}
+    <table>
+
+        {{ form.as_table}}
+    
+    </table>
+    
+    <input type="submit" value="INGRESAR">
+    
+</form>
+
+{% endblock %}

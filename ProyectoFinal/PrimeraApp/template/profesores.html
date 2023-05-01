@@ -11,7 +11,7 @@
 {% block Cambio %}
 
 <h1>Bienvenido Profesores</h1>
-
+<h2>{{ mensaje }}</h2>
 <form action="" method="POST">
     {% csrf_token %}
     <table>
@@ -25,11 +25,12 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
+            <th>id</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Email</th>
             <th>Profecion</th>
+            <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
@@ -61,6 +62,10 @@
                 <div class="container">
                 {{ profesor.profecion }}
                 </div>
+            </td>
+            <td>
+                <a class="btn btn-danger" href="{% url 'eliminar_profesor' profesor.id %}"> Eliminar</a>
+                <a class="btn btn-success" href="{% url 'editar_profesor' profesor.id %}"> Editar</a>
             </td>
         </tr>
         {% endfor %}

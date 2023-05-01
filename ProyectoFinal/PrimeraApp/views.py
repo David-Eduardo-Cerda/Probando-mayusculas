@@ -2,6 +2,9 @@ from django.shortcuts import render
 from .models import Curso , Profesor, Estudiante
 from django.http import HttpResponse
 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login , authenticate , logout
+
 from .form import Profesorform , Estudiantesform
 
 
@@ -89,3 +92,67 @@ def buscar(request):
 
 def buscar_comision(request):
       return render(request, 'template/buscar_comision.html')
+
+def eliminar_profesor(request, id):
+      profesor = Profesor.objects.get(id=id)
+      print(profesor)
+      profesor.delete()
+      profesores = Profesor.objects.all()
+      form = Profesorform()
+      return render(request , "template/profesores.html",{"profesores" : profesores, "mensaje": "Profesor eliminado", "form": form } )
+
+def editar_profesor(request, id):
+      profesor = Profesor.objects.get(id=id)
+      if request.method=="POST":
+            form = Profesorform(request.POST)
+            if form.is_valid():
+                  info = form.cleaned_data
+                  profesor.nombre = info["nombre"]
+                  profesor.apellido = info["apellido"]
+                  profesor.email = info["email"]
+                  profesor.profecion = info["profecion"]
+                  profesor.save()
+                  profesores = Profesor.objects.all()
+                  return render(request, "template/profesores.html", {"profesores" : profesores, "mensaje" : "Profesore editado correctamente", "form" : form})
+            pass
+      else:
+            formulario = Profesorform(initial={"nombre":profesor.nombre, "apellido":profesor.apellido, "email":profesor.email, "profesion":profesor.profecion})
+            return render(request, "template/editar_profesor.html", {"form": formulario, "profesor":profesor})
+      
+
+def loguear_usuario(request):
+      if request.method=="POST":
+            form = AuthenticationForm(request, data = request.POST)
+            if form.is_valid():
+                  info = form.cleaned_data
+                  usu = info["username"]
+                  clave = info['password']
+                  usuario = authenticate(username = usu , password = clave)
+                  if usuario is not None:
+                        login(request,usuario)
+                        return render(request , "template/inicio.html", {"mensaje" : f"Usuario {usu} logueado correctamente"})
+                  else:
+                        return render(request, "template/login.html", {'form': form , "mensaje":"Usuario o contrasenia incorrectos"})
+            else:
+                  return render(request , "template/login.html" , {"form": form, "mensaje" : "Usuario o contrasenia incorrectos"})
+      else:
+            form = AuthenticationForm()
+            return render( request, "template/login.html", {"form": form})
+      
+
+def registrar_usuario(request):
+      if request.method=="POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                  username = form.cleaned_data.get("username")
+                  form.save()
+                  return render(request , "template/inicio.html", {"mensaje" : f"Usuario {username} registrado correctamente"})
+                  
+            else:
+                  return render(request , "template/registrar_usuario.html" , {"form": form, "mensaje" : "Error al crear usuario"})
+      else:
+            form = UserCreationForm()
+            return render( request, "template/registrar_usuario.html", {"form": form})
+
+
+                        

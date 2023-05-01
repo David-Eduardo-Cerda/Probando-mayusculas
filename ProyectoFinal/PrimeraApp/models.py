@@ -24,7 +24,7 @@ class Profesor(models.Model):
 
     
     def __str__(self):
-        return f"{self.nombre} - {self.apellitod} - {self.email} - {self.profecion}"
+        return f"{self.nombre} - {self.apellido} - {self.email} - {self.profecion}"
 
 class Entregables(models.Model):
     nombre = models.CharField(max_length=30)
