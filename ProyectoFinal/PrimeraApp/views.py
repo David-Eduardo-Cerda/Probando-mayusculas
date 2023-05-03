@@ -23,10 +23,10 @@ from django.contrib.auth.decorators import login_required #con este decorador de
 
       return HttpResponse(respuesta)"""
 
-@login_required
+@login_required(login_url='login')
 def Cursos(request):
       return render(request , 'template/Cursos.html') 
-@login_required 
+@login_required(login_url='login')
 def Estudiantes(request):
 
       if request.method == "POST":
@@ -46,7 +46,7 @@ def Estudiantes(request):
       contex = {"estudiantes":estudiantes, "form": form}
 
       return render (request ,'template/Estudiantes.html',contex) 
-@login_required
+@login_required(login_url='login')
 def Profesores(request):
 
       if request.method == "POST":
@@ -131,7 +131,7 @@ def loguear_usuario(request):
                   usuario = authenticate(username = usu , password = clave)
                   if usuario is not None:
                         login(request,usuario)
-                        return render(request , "template/inicio.html", {"mensaje" : f"Usuario {usu} logueado correctamente"})
+                        return render(request , "template/inicioApp.html", {"mensaje" : f"Usuario {usu} logueado correctamente"})
                   else:
                         return render(request, "template/login.html", {'form': form , "mensaje":"Usuario o contrasenia incorrectos"})
             else:
@@ -147,7 +147,7 @@ def registrar_usuario(request):
             if form.is_valid():
                   username = form.cleaned_data.get("username")
                   form.save()
-                  return render(request , "template/inicio.html", {"mensaje" : f"Usuario {username} registrado correctamente"})
+                  return render(request , "template/inicioApp.html", {"mensaje" : f"Usuario {username} registrado correctamente"})
                   
             else:
                   return render(request , "template/registrar_usuario.html" , {"form": form, "mensaje" : "Error al crear usuario"})

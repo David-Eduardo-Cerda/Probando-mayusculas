@@ -21,7 +21,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                {% if use.is_autenticated %}
+                {% if use.is_authenticated %}
                 <a class="btn btn-danger" href="{% url 'inicioApp' %}" style="color:darkblue" >Comenzar App</a>
                 <a class="btn btn-primary" href="{% url 'cursos' %}">Cargar Cursos</a>
                 <a class="btn btn-primary" href="{% url 'estudiantes' %}">Cargar Estudiantes</a>
