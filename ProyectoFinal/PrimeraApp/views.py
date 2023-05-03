@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login , authenticate , logout
 
-from .form import Profesorform , Estudiantesform
+from .form import Profesorform , Estudiantesform ,Registro_usuario_form
+from django.contrib.auth.decorators import login_required #con este decorador de Django hacemos que alguien no pueda ingresar en alguna seccion sin antes estar logueado
 
 
 """def crear_curso(request):
@@ -22,10 +23,10 @@ from .form import Profesorform , Estudiantesform
 
       return HttpResponse(respuesta)"""
 
-
+@login_required
 def Cursos(request):
       return render(request , 'template/Cursos.html') 
- 
+@login_required 
 def Estudiantes(request):
 
       if request.method == "POST":
@@ -45,7 +46,7 @@ def Estudiantes(request):
       contex = {"estudiantes":estudiantes, "form": form}
 
       return render (request ,'template/Estudiantes.html',contex) 
-
+@login_required
 def Profesores(request):
 
       if request.method == "POST":
@@ -142,7 +143,7 @@ def loguear_usuario(request):
 
 def registrar_usuario(request):
       if request.method=="POST":
-            form = UserCreationForm(request.POST)
+            form =Registro_usuario_form(request.POST)
             if form.is_valid():
                   username = form.cleaned_data.get("username")
                   form.save()
@@ -151,7 +152,7 @@ def registrar_usuario(request):
             else:
                   return render(request , "template/registrar_usuario.html" , {"form": form, "mensaje" : "Error al crear usuario"})
       else:
-            form = UserCreationForm()
+            form = Registro_usuario_form()
             return render( request, "template/registrar_usuario.html", {"form": form})
 
 

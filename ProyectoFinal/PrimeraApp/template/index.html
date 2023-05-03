@@ -21,12 +21,18 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
+                {% if use.is_autenticated %}
                 <a class="btn btn-danger" href="{% url 'inicioApp' %}" style="color:darkblue" >Comenzar App</a>
                 <a class="btn btn-primary" href="{% url 'cursos' %}">Cargar Cursos</a>
                 <a class="btn btn-primary" href="{% url 'estudiantes' %}">Cargar Estudiantes</a>
                 <a class="btn btn-primary" href="{% url 'profesores' %}">Cargar Profesores</a>
                 <a class="btn btn-primary" href="{% url 'entregables' %}">Cargar Entregables</a>
-                <a class="btn btn-primary" href="{% url 'registrar_usuario' %}">Registrar usuario</a>
+                <a class="btn btn-danger" href="{% url 'logout' %}">Desloguear</a>
+
+                {% else %}
+                <a class="btn btn-danger" href="{% url 'registrar_usuario' %}">Registrar usuario</a>
+                <a class="btn btn-primary" href="{% url 'login' %}">Ingresar usuario</a>
+                {% endif %}
             </div>
         </nav>
         <!-- Masthead-->
